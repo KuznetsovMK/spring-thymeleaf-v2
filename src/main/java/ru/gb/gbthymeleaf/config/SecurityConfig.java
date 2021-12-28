@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests(
                 (requests) ->  {
-                    requests.antMatchers("/", "/product/all").permitAll();
+                    requests.antMatchers("/", "/product/all", "/cart/info").permitAll();
                     requests.antMatchers(HttpMethod.POST, "/product").hasRole("ADMIN");
                     requests.mvcMatchers(HttpMethod.GET, "/product/{productId}").permitAll();
                 }

@@ -1,9 +1,4 @@
-spring:
-  datasource:
-    url: 'jdbc:postgresql://localhost:5432/gb_shop'
-    username: 'geek'
-    password: 'geek'
-#  security:
-#    user:
-#      name: 'user'
-#      password: 'user'
+spring.datasource:
+  url: 'jdbc:postgresql://localhost:5432/gb_shop'
+  username: 'postgres_user1'
+  password: '123'
