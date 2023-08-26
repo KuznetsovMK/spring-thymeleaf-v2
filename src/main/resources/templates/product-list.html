@@ -45,12 +45,21 @@
                     </td>
                 </div>
 
-                <div sec:authorize="hasAuthority('USER') || isAnonymous()">
+                <div sec:authorize="hasAuthority('USER')">
                     <td>
                         <a type="button" class="btn btn-warning" th:href="@{'/product/' + ${product.id}}">Просмотреть</a>
                     </td>
                     <td>
-                        <a type="button" class="btn btn-danger" th:href="@{'/cart/add/' + ${product.id}}">Добавить в корзину</a>
+                        <a type="button" class="btn btn-danger" th:href="@{/cart/add(id=${product.id})}">Добавить в корзину</a>
+                    </td>
+                </div>
+
+                <div sec:authorize="isAnonymous()">
+                    <td>
+                        <a type="button" class="btn btn-warning" th:href="@{'/product/' + ${product.id}}">Просмотреть</a>
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-danger" th:href="@{'/cart/info'}">Добавить в корзину</a>
                     </td>
                 </div>
 
