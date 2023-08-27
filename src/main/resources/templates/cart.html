@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Карзина</title>
@@ -14,28 +14,40 @@
 <div th:replace="~{navbar :: navi(Cart)}"></div>
 
 <div class="container">
-    <span th:if="${products.size() == 0}">Товаров нет</span>
-    <div th:unless="${products.size() == 0}">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Название</th>
-                <th scope="col">Цена</th>
-                <th scope="col">Удалить из корзины</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="cart: ${products}" th:attr="prod_index=${cart.id}">
-                <td th:text="${cart.id}"></td>
-                <td th:text="${cart.title}"></td>
-                <td th:text="${cart.cost}"></td>
-                <td>
-                    <a type="button" class="btn btn-danger" th:href="@{/cart/delete(id=${cart.id})}">Удалить из корзины</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div sec:authorize="hasRole('ADMIN') || hasRole('USER')">
+        <span th:if="${products.size() == 0}">Товаров нет</span>
+        <div th:unless="${products.size() == 0}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Удалить из корзины</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cart: ${products}" th:attr="prod_index=${cart.id}">
+                    <td th:text="${cart.id}"></td>
+                    <td th:text="${cart.title}"></td>
+                    <td th:text="${cart.cost}"></td>
+                    <td>
+                        <a type="button" class="btn btn-danger" th:href="@{/cart/delete(id=${cart.id})}">Удалить из
+                            корзины</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div sec:authorize="isAnonymous()" class="nav-item">
+        <br><br><br>
+        <h2 th:align="center"> Товары в корзину могут добавлять только авторизованные пользователи </h2>
+        <br><br><br>
+        <form th:align="center" th:action="@{/logout}" method="post">
+            <input type="submit" class="btn btn-warning" th:value="Войти">
+        </form>
     </div>
 </div>
 

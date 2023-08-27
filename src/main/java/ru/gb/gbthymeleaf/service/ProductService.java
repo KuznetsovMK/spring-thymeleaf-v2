@@ -55,11 +55,6 @@ public class ProductService {
         }
     }
 
-
-
-
-
-
     @Transactional(propagation = Propagation.NEVER, isolation = Isolation.DEFAULT)
     public long count() {
         System.out.println(productDao.count());

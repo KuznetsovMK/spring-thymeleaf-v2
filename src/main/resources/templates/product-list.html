@@ -22,44 +22,48 @@
                 <th scope="col">#</th>
                 <th scope="col">Название</th>
                 <th scope="col">Цена</th>
-                <th scope="col" sec:authorize="hasAuthority('ADMIN')">Редактировать</th>
-                <th scope="col" sec:authorize="hasAuthority('ADMIN')">Удалить</th>
-                <th scope="col" sec:authorize="hasAuthority('USER') || isAnonymous()">Просмотреть</th>
-                <th scope="col" sec:authorize="hasAuthority('USER') || isAnonymous()">Добавить в корзину</th>
+                <th scope="col" sec:authorize="hasRole('ADMIN')">Редактировать</th>
+                <th scope="col" sec:authorize="hasRole('ADMIN')">Удалить</th>
+                <th scope="col" sec:authorize="hasRole('USER') || isAnonymous()">Просмотреть</th>
+                <th scope="col" sec:authorize="hasRole('USER') || isAnonymous()">Добавить в корзину</th>
             </tr>
             </thead>
             <tbody>
             <tr th:classappend="${product.status.name() == 'ACTIVE'} ? 'table-success' : 'table-secondary'"
-            th:each="product: ${products}" th:attr="prod_index=${product.id}">
+                th:each="product: ${products}" th:attr="prod_index=${product.id}">
                 <th scope="row">1</th>
                 <td th:text="${product.title}"></td>
                 <td th:text="${product.cost}"></td>
 
-                <div sec:authorize="hasAuthority('ADMIN')">
+                <div sec:authorize="hasRole('ADMIN')">
                     <td>
-                        <a type="button" class="btn btn-warning" th:href="@{/product(id=${product.id})}">Редактировать</a>
+                        <a type="button" class="btn btn-warning"
+                           th:href="@{/product(id=${product.id})}">Редактировать</a>
                     </td>
                     <td>
-                        <!--                    th:href="@{/product/delete/' + ${product.id}}"-->
-                        <a type="button" class="btn btn-danger" th:href="@{/product/delete(id=${product.id})}">Удалить</a>
+                        <a type="button" class="btn btn-danger"
+                           th:href="@{/product/delete(id=${product.id})}">Удалить</a>
                     </td>
                 </div>
 
-                <div sec:authorize="hasAuthority('USER')">
+                <div sec:authorize="hasRole('USER')">
                     <td>
-                        <a type="button" class="btn btn-warning" th:href="@{'/product/' + ${product.id}}">Просмотреть</a>
+                        <a type="button" class="btn btn-warning"
+                           th:href="@{'/product/' + ${product.id}}">Просмотреть</a>
                     </td>
                     <td>
-                        <a type="button" class="btn btn-danger" th:href="@{/cart/add(id=${product.id})}">Добавить в корзину</a>
+                        <a type="button" class="btn btn-danger" th:href="@{/cart/add(id=${product.id})}">Добавить в
+                            корзину</a>
                     </td>
                 </div>
 
                 <div sec:authorize="isAnonymous()">
                     <td>
-                        <a type="button" class="btn btn-warning" th:href="@{'/product/' + ${product.id}}">Просмотреть</a>
+                        <a type="button" class="btn btn-warning"
+                           th:href="@{'/product/' + ${product.id}}">Просмотреть</a>
                     </td>
                     <td>
-                        <a type="button" class="btn btn-danger" th:href="@{'/cart/info'}">Добавить в корзину</a>
+                        <a type="button" class="btn btn-danger" th:href="@{/cart/add(id=${product.id})}">Добавить в корзину</a>
                     </td>
                 </div>
 

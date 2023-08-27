@@ -25,11 +25,6 @@ public class CartController {
         return "cart";
     }
 
-    @GetMapping("/info")
-    public String info() {
-        return "cart-info";
-    }
-
     @GetMapping("/add")
     public String saveCart(@RequestParam(name = "id") Long id) {
         Product product = productService.findById(id);

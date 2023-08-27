@@ -13,8 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -51,14 +50,4 @@ public class Product {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", cost=" + cost +
-                ", manufactureDate=" + manufactureDate +
-                "}\n";
-    }
 }
